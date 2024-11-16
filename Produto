@@ -1,0 +1,17 @@
+public class Produto extends BaseEntity {
+    private String nome;
+    private String descricao;
+    private double preco;
+    private Categoria categoria;
+    private Restaurante restaurante;
+
+    public Produto(int id, String nome, String descricao, double preco, Categoria categoria, Restaurante restaurante) {
+        super(id);
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.restaurante = restaurante;
+    }
+
+}
