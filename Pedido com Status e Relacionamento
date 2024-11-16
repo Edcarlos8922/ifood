@@ -1,0 +1,27 @@
+import java.util.Date;
+
+public class Pedido extends BaseEntity {
+    private Date data;
+    private Restaurante restaurante;
+    private double valor;
+    private double taxaEntrega;
+    private StatusEntrega statusEntrega;
+    private FormaPagamento formaPagamento;
+    private String obs;
+    private double troco;
+    private Endereco endereco;
+
+    public Pedido(int id, Date data, Restaurante restaurante, double valor, double taxaEntrega, StatusEntrega statusEntrega, FormaPagamento formaPagamento, String obs, double troco, Endereco endereco) {
+        super(id);
+        this.data = data;
+        this.restaurante = restaurante;
+        this.valor = valor;
+        this.taxaEntrega = taxaEntrega;
+        this.statusEntrega = statusEntrega;
+        this.formaPagamento = formaPagamento;
+        this.obs = obs;
+        this.troco = troco;
+        this.endereco = endereco;
+    }
+
+}
