@@ -1,0 +1,85 @@
+CREATE TABLE Categoria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    descricao VARCHAR(255)
+);
+
+CREATE TABLE Restaurante (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(255),
+    telefone VARCHAR(20),
+    categoria_id INT,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
+);
+
+CREATE TABLE Produto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(255),
+    preco DECIMAL(10, 2),
+    categoria_id INT,
+    restaurante_id INT,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id),
+    FOREIGN KEY (restaurante_id) REFERENCES Restaurante(id)
+);
+
+CREATE TABLE FormaPagamento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_pagamento VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Endereco (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    rua VARCHAR(100),
+    numero INT,
+    bairro VARCHAR(50),
+    cidade VARCHAR(50),
+    estado VARCHAR(50),
+    cep VARCHAR(20),
+    complemento VARCHAR(50)
+);
+
+CREATE TABLE Pedido (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data DATE,
+    restaurante_id INT,
+    valor DECIMAL(10, 2),
+    taxa_entrega DECIMAL(10, 2),
+    forma_pagamento_id INT,
+    endereco_id INT,
+    FOREIGN KEY (restaurante_id) REFERENCES Restaurante(id),
+    FOREIGN KEY (forma_pagamento_id) REFERENCES FormaPagamento(id),
+    FOREIGN KEY (endereco_id) REFERENCES Endereco(id)
+);
+
+CREATE TABLE PedidoProduto (
+    pedido_id INT,
+    produto_id INT,
+    quantidade INT,
+    PRIMARY KEY (pedido_id, produto_id),
+    FOREIGN KEY (pedido_id) REFERENCES Pedido(id),
+    FOREIGN KEY (produto_id) REFERENCES Produto(id)
+);
+
+CREATE TABLE Promo (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50),
+    valor DECIMAL(10, 2),
+    codigo VARCHAR(50),
+    validade DATE
+);
+
+CREATE TABLE StatusEntrega (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE HistoricoEntrega (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    pedido_id INT,
+    status_entrega_id INT,
+    data_hora TIMESTAMP,
+    FOREIGN KEY (pedido_id) REFERENCES Pedido(id),
+    FOREIGN KEY (status_entrega_id) REFERENCES StatusEntrega(id)
+);
