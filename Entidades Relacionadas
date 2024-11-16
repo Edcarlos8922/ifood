@@ -1,0 +1,19 @@
+public class Restaurante extends BaseEntity {
+    private String nome;
+    private String endereco;
+    private String telefone;
+    private String categoria;
+    private String horaFuncionamento;
+    private boolean isRetirada;
+
+    public Restaurante(int id, String nome, String endereco, String telefone, String categoria, String horaFuncionamento, boolean isRetirada) {
+        super(id);
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.categoria = categoria;
+        this.horaFuncionamento = horaFuncionamento;
+        this.isRetirada = isRetirada;
+    }
+
+}
